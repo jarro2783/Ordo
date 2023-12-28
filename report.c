@@ -830,14 +830,14 @@ all_report 	( const struct GAMES 			*g
 	assert (e);
 	assert (rps);
 
-	if (NULL == (out_info = memnew (sizeof(struct OUT_INFO) * (size_t)p->n))) {
+	if (NULL == (out_info = (OUT_INFO*)memnew (sizeof(struct OUT_INFO) * (size_t)p->n))) {
 		fatal_mem("Not enough memory for reporting results");
 	}
-	if (NULL == (q = memnew (((size_t)p->n + 1) * sizeof(struct outextra)))) {
+	if (NULL == (q = (outextra*)memnew (((size_t)p->n + 1) * sizeof(struct outextra)))) {
 		memrel(out_info);
 		fatal_mem("Not enough memory for creation of internal buffers for reporting results");
 	}
-	if (NULL == (listbuff = memnew ( sizeof (inp_list[0]) * (listlen (inp_list) + 2)))) {
+	if (NULL == (listbuff = (int*)memnew ( sizeof (inp_list[0]) * (listlen (inp_list) + 2)))) {
 		memrel(out_info);
 		memrel(q);
 		fatal_mem("Not enough memory for list creation");
@@ -1018,7 +1018,7 @@ string_dup (const char *s)
 	char *p;
 	char *q;
 	size_t len = strlen(s);
-	p = memnew (len + 1);
+	p = (char*)memnew (len + 1);
 	if (p == NULL) return NULL;
 	q = p;
 	while (*s) *p++ = *s++;
@@ -1175,7 +1175,7 @@ look_at_individual_deviation
 	double diff;
 	player_t j;
 	size_t allocsize = sizeof(double) * (size_t)(n_players+1);
-	double *expected = memnew(allocsize);
+	double *expected = (double*)memnew(allocsize);
 
 	if (expected) {
 		printf ("\nResidues\n\n");

@@ -57,7 +57,7 @@ static char *posn = NULL;  	/* position in argv[opt_index] 		*/
 
 int options(int argc, char *argv[], const char *legal)
 {
-	char *legal_index = NULL;
+	const char *legal_index = NULL;
 	int letter = 0;
 
 	if (NULL == posn || '\0' == *posn) {
@@ -238,7 +238,7 @@ int options_l	(
 				int *longindex
 				)
 {
-	char *legal_index = NULL;
+	const char *legal_index = NULL;
 	int letter = 0;
 
 	if (NULL == posn || '\0' == *posn) {

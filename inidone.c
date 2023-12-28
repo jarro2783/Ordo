@@ -50,17 +50,17 @@ ratings_init (player_t n, struct RATINGS *r)
 	if (ok) {
 		r->size				= n;
 
-		r->sorted 			= pu[0];
-		r->playedby 		= pu[1];
-		r->playedby_results = pu[2];
+		r->sorted 			= (gamesnum_t*)pu[0];
+		r->playedby 		= (gamesnum_t*)pu[1];
+		r->playedby_results = (gamesnum_t*)pu[2];
 
-		r->obtained 		= pu[3];
- 		r->ratingof 		= pu[4];
- 		r->ratingbk 		= pu[5];
+		r->obtained 		= (double*)pu[3];
+ 		r->ratingof 		= (double*)pu[4];
+ 		r->ratingbk 		= (double*)pu[5];
 
- 		r->changing 		= pu[6];
-		r->ratingof_results = pu[7];
-		r->obtained_results = pu[8];
+ 		r->changing 		= (double*)pu[6];
+		r->ratingof_results = (double*)pu[7];
+		r->obtained_results = (double*)pu[8];
 	}
 	return ok;
 }
@@ -125,7 +125,7 @@ games_init (gamesnum_t n, struct GAMES *g)
 
 	assert (n > 0);
 
-	if (NULL == (p = memnew (sizeof(struct gamei) * (size_t)n))) {
+	if (NULL == (p = (gamei*)memnew (sizeof(struct gamei) * (size_t)n))) {
 		g->n	 	= 0; 
 		g->size 	= 0;
 		g->ga		= NULL;
@@ -208,12 +208,12 @@ players_init (player_t n, struct PLAYERS *x)
 	x->n				= 0; /* empty for now */
 	x->size				= n;
 	x->anchored_n		= 0;
-	x->name 			= pv[0];
-	x->flagged			= pv[1];
-	x->present_in_games	= pv[2];
-	x->prefed			= pv[3];
-	x->priored			= pv[4]; 
-	x->performance_type = pv[5]; 
+	x->name 			= (const char**)pv[0];
+	x->flagged			= (bool_t*)pv[1];
+	x->present_in_games	= (bool_t*)pv[2];
+	x->prefed			= (bool_t*)pv[3];
+	x->priored			= (bool_t*)pv[4]; 
+	x->performance_type = (int*)pv[5]; 
 
 	x->perf_set = FALSE;
 
@@ -272,10 +272,10 @@ supporting_auxmem_init 	( player_t nplayers
 
 	assert(nplayers > 0);
 
-	if (NULL == (d = memnew (sd * (size_t)nplayers))) {
+	if (NULL == (d = (prior*)memnew (sd * (size_t)nplayers))) {
 		return FALSE;
 	} else 
-	if (NULL == (e = memnew (se * (size_t)nplayers))) {
+	if (NULL == (e = (prior*)memnew (se * (size_t)nplayers))) {
 		memrel(d);
 		return FALSE;
 	}
@@ -303,7 +303,7 @@ priorlist_init 	(player_t nplayers)
 	struct prior *d;
 	size_t	sd = sizeof(struct prior);
 	assert(nplayers > 0);
-	if (NULL == (d = memnew (sd * (size_t)nplayers))) {
+	if (NULL == (d = (prior*)memnew (sd * (size_t)nplayers))) {
 		return NULL;
 	} 
 	return d;

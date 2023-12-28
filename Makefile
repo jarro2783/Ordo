@@ -1,8 +1,8 @@
-CC = gcc
-CFLAGS = -DNDEBUG -DMY_SEMAPHORES -flto -I myopt -I sysport
+CC = g++
+CFLAGS = -DNDEBUG -DMY_SEMAPHORES -flto -I myopt -I sysport -g
 CFLAGSD = -g -DMY_SEMAPHORES -I myopt -I sysport
 WARN = -Wwrite-strings -Wconversion -Wshadow -Wparentheses -Wlogical-op -Wunused -Wmissing-prototypes -Wmissing-declarations -Wdeclaration-after-statement -W -Wall -Wextra
-OPT = -O3
+OPT = -O3 -march=native
 LIBFLAGS = -lm -lpthread
 
 EXE = ordo

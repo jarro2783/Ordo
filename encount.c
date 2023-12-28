@@ -39,8 +39,8 @@ static int compare_ENC (const void * a, const void * b);
 
 static int compare_ENC (const void * a, const void * b)
 {
-	const struct ENC *ap = a;
-	const struct ENC *bp = b;
+	const struct ENC *ap = (ENC*)a;
+	const struct ENC *bp = (ENC*)b;
 	if (ap->wh == bp->wh && ap->bl == bp->bl) return 0;
 	if (ap->wh == bp->wh) {
 		if (ap->bl > bp->bl) return 1; else return -1;
@@ -67,7 +67,7 @@ encounters_init (gamesnum_t n, struct ENCOUNTERS *e)
 
 	assert (n > 0);
 
-	if (NULL == (p = memnew (sizeof(struct ENC) * (size_t)n))) {
+	if (NULL == (p = (ENC*)memnew (sizeof(struct ENC) * (size_t)n))) {
 		e->n	 	= 0; 
 		e->size 	= 0;
 		e->enc		= NULL;
@@ -326,8 +326,8 @@ shrink_ENC (struct ENC *enc, gamesnum_t N_enc)
 
 static int compare_plist (const void * a, const void * b)
 {
-	const player_t *ap = a;
-	const player_t *bp = b;
+	const player_t *ap = (player_t*)a;
+	const player_t *bp = (player_t*)b;
 	return *ap > *bp? 1: (*ap < *bp? -1: 0);	
 }
 
@@ -389,19 +389,19 @@ calc_output_info
 	player_t 	j, o, q, z;
 	gamesnum_t 	e, n;
 
-	if (NULL == (pend  = memnew(sizeof(encnode_t *) * (size_t)n_players))) {
+	if (NULL == (pend  = (encnode_t**)memnew(sizeof(encnode_t *) * (size_t)n_players))) {
 		fprintf(stderr, "No enough memory available, FILE %s, LINE %d\n", __FILE__, __LINE__); exit(EXIT_FAILURE);
 	}
-	if (NULL == (ep    = memnew(sizeof(encnode_t  ) * (size_t)N_enc    ))) {
+	if (NULL == (ep    = (encnode_t*)memnew(sizeof(encnode_t  ) * (size_t)N_enc    ))) {
 		memrel(pend);
 		fprintf(stderr, "No enough memory available, FILE %s, LINE %d\n", __FILE__, __LINE__); exit(EXIT_FAILURE);
 	}
-	if (NULL == (p__   = memnew(sizeof(gamesnum_t ) * (size_t)n_players))) {
+	if (NULL == (p__   = (gamesnum_t*)memnew(sizeof(gamesnum_t ) * (size_t)n_players))) {
 		memrel(pend);
 		memrel(ep);
 		fprintf(stderr, "No enough memory available, FILE %s, LINE %d\n", __FILE__, __LINE__); exit(EXIT_FAILURE);
 	}
-	if (NULL == (plist = memnew(sizeof(player_t   ) * (size_t)n_players * 2))) {
+	if (NULL == (plist = (player_t*)memnew(sizeof(player_t   ) * (size_t)n_players * 2))) {
 		memrel(pend);
 		memrel(ep);
 		memrel(p__);

@@ -172,7 +172,7 @@ static bool_t nodetree_is_hit (const struct DATA *d, const char *s, uint32_t has
 static bool_t
 name_tree_init (void)
 {
-	struct BUFFERBLOCK *q = memnew (sizeof (struct BUFFERBLOCK));
+	struct BUFFERBLOCK *q = (BUFFERBLOCK*)memnew (sizeof (struct BUFFERBLOCK));
 	if (q == NULL) return FALSE;
 	q->next = NULL;
 	Buffer_head = q;
@@ -201,7 +201,7 @@ name_tree_done (void)
 static bool_t
 name_tree_addmem (void)
 {
-	struct BUFFERBLOCK *q = memnew (sizeof (struct BUFFERBLOCK));
+	struct BUFFERBLOCK *q = (BUFFERBLOCK*)memnew (sizeof (struct BUFFERBLOCK));
 	if (q == NULL) return FALSE;
 	q->next = NULL;
 	Buffer_curr->next = q;

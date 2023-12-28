@@ -289,7 +289,7 @@ calc_rating_bayes
 	bool_t			multiple_anchors_present = anchored_n > 1; 
 	//----------------------------------------------------------
 
-	probarr = memnew (sizeof(double) * (size_t)n_players * 4);
+	probarr = (double*)memnew (sizeof(double) * (size_t)n_players * 4);
 
 	if (NULL == probarr) {
 		fprintf(stderr,"Not enough memory to initialize probability arrays\n");
@@ -981,7 +981,7 @@ static double
 unfit_wadv (double x, const void *p)
 {
 	double r;
-	const struct UNFITNESS_WA_DR *q = p;
+	const struct UNFITNESS_WA_DR *q = (UNFITNESS_WA_DR*)p;
 	assert(!is_nan(x));
 	r = calc_bayes_unfitness_full	
 							( q->n_enc
@@ -1004,7 +1004,7 @@ static double
 unfit_drra (double x, const void *p)
 {
 	double r;
-	const struct UNFITNESS_WA_DR *q = p;
+	const struct UNFITNESS_WA_DR *q = (UNFITNESS_WA_DR*)p;
 	assert(!is_nan(x));
 	r = calc_bayes_unfitness_full	
 							( q->n_enc

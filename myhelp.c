@@ -41,7 +41,7 @@ optionlist_new (struct helpline *hl)
 	while (!eo_helplist(i)) i++;
 	n = (size_t)(i - hl + 1);
 
-	if (NULL == (k_start = malloc (sizeof(struct option) * n)))
+	if (NULL == (k_start = (option*)malloc (sizeof(struct option) * n)))
 		return NULL;
 
 	for (i = hl, k = k_start; !eo_helplist(i); i++, k++) {

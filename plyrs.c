@@ -133,8 +133,8 @@ players_set_super (bool_t quiet, const struct ENCOUNTERS *ee, struct PLAYERS *pl
 
 	player_t counter_nogames, counter_all_W, counter_all_L;
 
-	obt = memnew (sizeof(double) * (size_t)n_players);
-	pla = memnew (sizeof(gamesnum_t) * (size_t)n_players);
+	obt = (double*)memnew (sizeof(double) * (size_t)n_players);
+	pla = (gamesnum_t*)memnew (sizeof(gamesnum_t) * (size_t)n_players);
 	if (NULL==obt || NULL==pla) {
 		fprintf(stderr, "Not enough memory\n");
 		exit(EXIT_FAILURE);

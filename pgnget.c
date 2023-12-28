@@ -86,7 +86,7 @@ structdata_init (void)
 	struct NAMEBLOCK *t = NULL;
 	bool_t ok = TRUE;
 
-	ok = ok && NULL != (d = memnew (sizeof(struct DATA)));
+	ok = ok && NULL != (d = (DATA*) memnew (sizeof(struct DATA)));
 	if (ok) {
 		d->labels_head.buf = NULL;
 		d->labels_head.nxt = NULL;
@@ -104,11 +104,11 @@ structdata_init (void)
 		d->nm_idx = 0;
 		d->nm_allocated = 0;
 
-		ok = ok && NULL != (p = memnew (sizeof(struct GAMEBLOCK)));
+		ok = ok && NULL != (p = (GAMEBLOCK*) memnew (sizeof(struct GAMEBLOCK)));
 		if (ok)	d->gb_allocated++;
 		d->gb[0] = p;
 
-		ok = ok && NULL != (t = memnew (sizeof(struct NAMEBLOCK)));
+		ok = ok && NULL != (t = (NAMEBLOCK*) memnew (sizeof(struct NAMEBLOCK)));
 		if (ok)	d->nm_allocated++;
 		d->nm[0] = t;
 
@@ -400,7 +400,7 @@ addname (struct DATA *d, const char *s)
 	if (!ok) {
 		assert (d->curr->nxt == NULL);
 		assert (d->curr->idx == 0);
-		ok = NULL != (bf = memnew (LABELBUFFERSIZE));
+		ok = NULL != (bf = (char*) memnew (LABELBUFFERSIZE));
 		if (ok) {
 			bf[0] = '\0';
 			d->curr->buf = bf;
@@ -414,9 +414,9 @@ addname (struct DATA *d, const char *s)
 	ok = ok && (LABELBUFFERSIZE > d->curr->idx + sz);
 
 	if (!ok) {
-		ok = NULL != (nd = memnew (sizeof(namenode_t)));
+		ok = NULL != (nd = (namenode_t*) memnew (sizeof(namenode_t)));
 		if (ok) {
-			ok = NULL != (bf = memnew (LABELBUFFERSIZE));
+      ok = NULL != (bf = (char*) memnew (LABELBUFFERSIZE));
 			if (ok) bf[0] = '\0'; else memrel(nd);
 		}
 
@@ -466,7 +466,7 @@ addplayer (struct DATA *d, const char *s, player_t *idx)
 			d->nm_idx = 0;
 			d->nm_filled++;
 
-			success = NULL != (nm = memnew (sizeof(struct NAMEBLOCK)));
+			success = NULL != (nm = (NAMEBLOCK*) memnew (sizeof(struct NAMEBLOCK)));
 			if (success) {
 				d->nm_allocated++;
 			}
@@ -745,7 +745,7 @@ pgn_result_collect (struct pgn_result *p, struct DATA *d)
 			d->gb_filled++;
 
 			blk = d->gb_filled;
-			if (NULL == (g = memnew (sizeof(struct GAMEBLOCK) * (size_t)1))) {
+			if (NULL == (g = (GAMEBLOCK*) memnew (sizeof(struct GAMEBLOCK) * (size_t)1))) {
 				d->gb[blk] = NULL;
 				ok = FALSE; // failed
 			} else {

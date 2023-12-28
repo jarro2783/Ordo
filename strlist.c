@@ -42,7 +42,7 @@ string_dup (const char *s)
 	char *p;
 	char *q;
 	size_t len = strlen(s);
-	p = memnew (len + 1);
+	p = (char*)memnew (len + 1);
 	if (p == NULL) return NULL;
 	q = p;
 	while (*s) *p++ = *s++;
@@ -59,7 +59,7 @@ string_free (char *s)
 static strnode_t *
 newnode(void)
 {
-	strnode_t *p = memnew(sizeof(strnode_t));
+	strnode_t *p = (strnode_t*)memnew(sizeof(strnode_t));
 	if (p) {
 		p->str = NULL;
 		p->nxt = NULL;

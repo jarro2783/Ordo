@@ -94,7 +94,7 @@ calc_rating ( bool_t 					quiet
 		double *ratingtmp_memory;
 
 		assert(plyrs->n > 0);
-		if (NULL != (ratingtmp_memory = memnew (sizeof(double) * (size_t)plyrs->n))) {
+		if (NULL != (ratingtmp_memory = (double*)memnew (sizeof(double) * (size_t)plyrs->n))) {
 
 			assert(ratings_sanity (plyrs->n, rat->ratingof));
 

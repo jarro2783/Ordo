@@ -1358,8 +1358,8 @@ table_output(double rtng_76)
 
 static int compare_GAME (const void * a, const void * b)
 {
-	const struct gamei *ap = a;
-	const struct gamei *bp = b;
+	const struct gamei *ap = (gamei*)a;
+	const struct gamei *bp = (gamei*)b;
 	if (ap->whiteplayer == bp->whiteplayer && ap->blackplayer == bp->blackplayer) return 0;
 	if (ap->whiteplayer == bp->whiteplayer) {
 		if (ap->blackplayer > bp->blackplayer) return 1; else return -1;

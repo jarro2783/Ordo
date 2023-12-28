@@ -335,9 +335,9 @@ rate_super_players	( bool_t quiet
 	size_t		np = (size_t) n_players;
 	size_t		ne = (size_t) N_enc;
 
-	if (NULL != (weig = memnew(sizeof(double) * ne))) {
-		if (NULL != (rtng = memnew(sizeof(double) * ne))) {
-			if (NULL != (myenc = memnew (sizeof(struct ENC) * ne))) {
+	if (NULL != (weig = (double*)memnew(sizeof(double) * ne))) {
+		if (NULL != (rtng = (double*)memnew(sizeof(double) * ne))) {
+			if (NULL != (myenc = (ENC*)memnew (sizeof(struct ENC) * ne))) {
 
 				rate_super_players_internal
 					( quiet

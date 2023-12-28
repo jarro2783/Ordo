@@ -636,7 +636,7 @@ thread_return_t THREAD_CALL
 simul_smp_process (void *p)
 {
 	bool_t ok;
-	struct SIMSMP *s = p;
+	struct SIMSMP *s = (SIMSMP*)p;
 
 	struct PLAYERS 			_plyrs			;	
 	struct ENCOUNTERS		_encount		;	

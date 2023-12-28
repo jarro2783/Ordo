@@ -90,7 +90,7 @@ csv_line_init(csv_line_t *c, char *p)
 
 	c->n = 0;	
 	c->s[0] = NULL;
-	c->mem = memnew(MAXSIZE_CSVLINE);
+	c->mem = (char*)memnew(MAXSIZE_CSVLINE);
 
 	if (NULL != c->mem) {
 

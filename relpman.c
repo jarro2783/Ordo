@@ -41,7 +41,7 @@ rpblock_clear (rpblock_t *r)
 static rpblock_t *
 rpblock_create(void)
 {
-	rpblock_t *q = memnew (sizeof(rpblock_t));
+	rpblock_t *q = (rpblock_t*)memnew (sizeof(rpblock_t));
 	if (q) rpblock_clear(q);
 	return q;
 }
@@ -189,7 +189,7 @@ rpman_to_newarray (struct rpmanager *rm, player_t *psz)
 	rpunit_t *pu;
 	player_t sz = (player_t)rpman_count (rm);
 
-	p = memnew(sizeof(rpunit_t) * (size_t) sz);
+	p = (rpunit_t*)memnew(sizeof(rpunit_t) * (size_t) sz);
 	p_ret = p;
 
 	if (p == NULL) return p;

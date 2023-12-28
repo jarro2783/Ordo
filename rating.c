@@ -266,7 +266,7 @@ static double
 unfit_wadv (double x, const void *p)
 {
 	double r;
-	const struct UNFITWADV *q = p;
+	const struct UNFITWADV *q = (UNFITWADV*)p;
 	assert(!is_nan(x));
 	r = overallerrorE_fwadv (q->n_enc, q->enc, q->ratingof, q->beta, x);
 	assert(!is_nan(r));
@@ -356,7 +356,7 @@ static double
 unfit_drawrate (double x, const void *p)
 {
 	double r;
-	const struct UNFITDRAWRATE *q = p;
+	const struct UNFITDRAWRATE *q = (UNFITDRAWRATE*)p;
 	assert(!is_nan(x));
 	r = overallerrorE_fdrawrate (q->n_enc, q->enc, q->ratingof, q->beta, q->wadv, x);
 	assert(!is_nan(r));
@@ -479,7 +479,7 @@ static double
 unfitf (double x, const void *p)
 {
 	double r;
-	const struct UNFITPAR *q = p;
+	const struct UNFITPAR *q = (UNFITPAR*)p;
 	assert(!is_nan(x));
 	r =	unfitness_fcenter 	( x
 							, q->enc, q->n_enc, q->n_players, q->ratingof, q->flagged, q->prefed
@@ -616,7 +616,7 @@ calc_rating_ordo
 	//double RAT[20000];
 
 	assert(ratings_sanity (n_players, ratingof));
-	if (NULL == (expected = memnew(sizeof(double) * (size_t)(n_players+1)))) {
+	if (NULL == (expected = (double*)memnew(sizeof(double) * (size_t)(n_players+1)))) {
 		fprintf(stderr, "Not enough memory to allocate all players\n");
 		exit(EXIT_FAILURE);
 	}

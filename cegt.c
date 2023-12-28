@@ -121,7 +121,7 @@ output_cegt_style_f (FILE *genf, FILE *ratf, FILE *prgf, struct CEGT *p)
 	if (ratf) all_report_rat (ratf, p);
 	if (genf) all_report_gen (genf, p);
 
-	if (NULL != (Temp_enc = memnew(sizeof(struct ENC) * (size_t)(N_enc+1)))) {
+	if (NULL != (Temp_enc = (ENC*)memnew(sizeof(struct ENC) * (size_t)(N_enc+1)))) {
 		if (prgf) all_report_prg (prgf, p, Temp_enc); 
 		memrel(Temp_enc);
 	}
@@ -165,8 +165,8 @@ output_report_individual_f (FILE *indf, struct CEGT *p, int simulate)
 
 	assert (indf);
 
-	if (NULL != (oline = memnew(sizeof(struct OPP_LINE) * (size_t)N_players))) {
-		if (NULL != (Temp_enc = memnew(sizeof(struct ENC) * (size_t)(N_enc+1)))) {
+	if (NULL != (oline = (OPP_LINE*) memnew(sizeof(struct OPP_LINE) * (size_t)N_players))) {
+		if (NULL != (Temp_enc = (ENC*) memnew(sizeof(struct ENC) * (size_t)(N_enc+1)))) {
 
 			all_report_indiv_stats (indf, p, simulate, oline, Temp_enc); 
 
@@ -338,8 +338,8 @@ all_report_rat (FILE *textf, struct CEGT *p)
 
 static int compare_ENC2 (const void * a, const void * b)
 {
-	const struct ENC *ap = a;
-	const struct ENC *bp = b;
+	const struct ENC *ap = (ENC*)a;
+	const struct ENC *bp = (ENC*)b;
 
 	player_t topa = ap->wh > ap->bl? ap->wh: ap->bl;
 	player_t bota = ap->wh < ap->bl? ap->wh: ap->bl;
@@ -498,8 +498,8 @@ all_report_prg (FILE *textf, struct CEGT *p, struct ENC *Temp_enc)
 
 static int compare_oline (const void * a, const void * b)
 {
-	const struct OPP_LINE *ap = a;
-	const struct OPP_LINE *bp = b;
+	const struct OPP_LINE *ap = (OPP_LINE*)a;
+	const struct OPP_LINE *bp = (OPP_LINE*)b;
 	double aR = ap->R;
 	double bR = bp->R;
 	if (aR < bR) {
