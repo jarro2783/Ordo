@@ -28,7 +28,12 @@
 #define STANDARD_DRAWRATE 0.5
 
 extern double 	inv_xpect	(double invbeta, double p);
-extern double 	xpect (double a, double b, double beta);
+
+inline double 	xpect (double a, double b, double beta)
+{
+	return 1.0 / (1.0 + exp((b-a)*beta));
+}
+
 extern void 	get_pWDL(double delta_rating /*delta rating*/, double *pw, double *pd, double *pl, double drawrate0, double beta);
 extern double 	draw_rate_fperf (double p, double d0);
 

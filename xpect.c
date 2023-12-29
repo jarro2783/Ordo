@@ -30,11 +30,13 @@ double inv_xpect	(double invbeta, double p)
 	return (-1.0*invbeta) * log(100.0/p-1.0);
 }
 
+#if 0
 double
 xpect (double a, double b, double beta)
 {
 	return 1.0 / (1.0 + exp((b-a)*beta));
 }
+#endif
 
 #if 0
 void
